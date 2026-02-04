@@ -1,8 +1,17 @@
-console.log("Hello, World!");
+import express from 'express';
+import bodyParser from 'body-parser';
 
-let x = "wassup guys"
+const app = express();
+const port = 3000;
 
-console.log(x);
+// Middleware to parse JSON bodies
+app.use(bodyParser.json());
 
-console.log(parseFloat("4.25abc"))
+// Sample route
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
 
+app.listen(port, () => {
+    console.log(`Server is listening on port: ${port}`);
+})

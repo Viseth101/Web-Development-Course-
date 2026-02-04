@@ -13,9 +13,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Viseth101/Web-Development-Course-/issues"
   },
-  "homepage": "https://github.com/Viseth101/Web-Development-Course-#readme"
+  "homepage": "https://github.com/Viseth101/Web-Development-Course-#readme",
+  "dependencies": {
+    "express.js": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }
