@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/Viseth101/Web-Development-Course-#readme",
   "dependencies": {
-    "express.js": "^1.0.0"
+    "express.js": "^1.0.0",
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
