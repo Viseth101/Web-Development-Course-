@@ -1,0 +1,213 @@
+/* styles.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.header {
+    text-align: center;
+    color: white;
+}
+
+.header h1 {
+    margin: 0 0 15px 0;
+    font-size: 32px;
+}
+
+.mode-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.mode-btn {
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.mode-btn.active {
+    background-color: white;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.mode-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.stats {
+    display: flex;
+    gap: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px 30px;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.stat {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.stat span:last-child {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 5px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-gap: 10px;
+}
+
+@keyframes flipIn {
+    0% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes flipOut {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #2c3e50;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    perspective: 1000px;
+    border: 2px solid #34495e;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card.flipped {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    animation: flipIn 0.6s ease-in-out;
+    border-color: #bdc3c7;
+}
+
+.card.unflipping {
+    animation: flipOut 0.6s ease-in-out;
+}
+
+.card.matched {
+    background-color: #27ae60;
+    cursor: default;
+    pointer-events: none;
+}
+
+.hint-btn, .reset-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.hint-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+.hint-btn:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+}
+
+.hint-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    transform: scale(1);
+}
+
+.reset-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.reset-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1000;
+}
+
+.game-over h2 {
+    font-size: 28px;
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+}
+
+.game-over p {
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}

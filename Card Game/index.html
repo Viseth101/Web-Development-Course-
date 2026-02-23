@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Matching Game</title>
+    <link rel="stylesheet" href="/style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="top-controls">
+                <button id="darkModeToggle" class="icon-btn">🌙</button>
+                <button id="soundToggle" class="icon-btn">🔊</button>
+                <h1>🎮 Memory Card Game 🎮</h1>
+                <button id="settingsBtn" class="icon-btn">⚙️</button>
+                <button id="instructionsBtn" class="icon-btn">❓</button>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <span>Score:</span>
+                <span id="score">0</span>
+            </div>
+            <div class="stat">
+                <span>Flips:</span>
+                <span id="flips">0</span>
+            </div>
+            <div class="stat">
+                <span>Combo:</span>
+                <span id="combo">0</span>
+            </div>
+            <div class="stat" id="hardModeCounter" style="display:none;">
+                <span>Remaining:</span>
+                <span id="remaining">20</span>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard">
+            <!-- Cards will be created here -->
+        </div>
+
+        <div class="buttons-group">
+            <button id="hintBtn" class="game-btn">💡 Hint</button>
+            <button id="undoBtn" class="game-btn">↩️ Undo</button>
+            <button id="pauseBtn" class="game-btn">⏸ Pause</button>
+            <button id="resetBtn" class="game-btn">🔄 Reset</button>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="achievements-section">
+            <h3>🏅 Achievements</h3>
+            <div id="achievementsList" class="achievements-grid">
+                <!-- Achievements will be displayed here -->
+            </div>
+        </div>
+
+        <!-- High Scores -->
+        <div class="high-scores-section">
+            <h3>🏆 Top Scores</h3>
+            <div id="highScores" class="high-scores-list">
+                <!-- Scores will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Modal -->
+    <div id="statsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>📊 Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Games</h4>
+                    <p id="totalGames">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Win Rate</h4>
+                    <p id="winRate">0%</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Best Score</h4>
+                    <p id="bestScore">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Avg Flips</h4>
+                    <p id="avgFlips">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal" style="display: none;">
+        <div class="modal-content settings-modal">
+            <span class="close">&times;</span>
+            <h2>⚙️ Settings</h2>
+            
+            <div class="settings-section">
+                <h3>🎮 Game Modes</h3>
+                <div class="mode-selector">
+                    <button class="game-mode-btn active" data-mode="classic">Classic</button>
+                    <button class="game-mode-btn" data-mode="speedrun">Speed Run</button>
+                    <button class="game-mode-btn" data-mode="daily">Daily</button>
+                    <button class="game-mode-btn" data-mode="multiplayer">Multiplayer</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>🎯 Difficulty</h3>
+                <div class="difficulty-selector">
+                    <button class="mode-btn active" data-mode="normal">Normal</button>
+                    <button class="mode-btn" data-mode="easy">Easy (30)</button>
+                    <button class="mode-btn" data-mode="hard">Hard (20)</button>
+                    <button class="mode-btn" data-mode="insane">Insane (10)</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>📏 Grid Size</h3>
+                <div class="grid-selector">
+                    <button class="grid-btn active" data-grid="4">4x4</button>
+                    <button class="grid-btn" data-grid="5">5x5</button>
+                    <button class="grid-btn" data-grid="6">6x6</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>🎨 Theme</h3>
+                <div class="theme-selector">
+                    <button class="theme-btn active" data-theme="arts">Arts</button>
+                    <button class="theme-btn" data-theme="animals">Animals</button>
+                    <button class="theme-btn" data-theme="food">Food</button>
+                    <button class="theme-btn" data-theme="sports">Sports</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>🔊 Audio</h3>
+                <div class="control-item">
+                    <label>Sound Effects: <span id="soundVolDisplay">100%</span></label>
+                    <input type="range" id="soundVolume" min="0" max="100" value="100" class="volume-slider">
+                </div>
+                <div class="control-item">
+                    <label>Music: <span id="musicVolDisplay">50%</span></label>
+                    <input type="range" id="musicVolume" min="0" max="100" value="50" class="volume-slider">
+                </div>
+                <div class="control-item">
+                    <label>Sound Theme:</label>
+                    <div class="sound-theme-quick">
+                        <button class="sound-opt active" data-sound="classic">Classic</button>
+                        <button class="sound-opt" data-sound="retro">Retro</button>
+                        <button class="sound-opt" data-sound="magical">Magical</button>
+                        <button class="sound-opt" data-sound="futuristic">Futuristic</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>✨ Animation</h3>
+                <div class="control-item">
+                    <label>Flip Speed: <span id="flipSpeedDisplay">300ms</span></label>
+                    <input type="range" id="flipSpeed" min="100" max="1000" value="300" class="volume-slider">
+                </div>
+                <div class="control-item">
+                    <label>Flip Style:</label>
+                    <div class="animation-selector">
+                        <button class="anim-btn active" data-anim="spin">Spin</button>
+                        <button class="anim-btn" data-anim="slide">Slide</button>
+                        <button class="anim-btn" data-anim="fade">Fade</button>
+                        <button class="anim-btn" data-anim="bounce">Bounce</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>♿ Accessibility</h3>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="highContrastMode"> High Contrast
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="colorblindMode"> Colorblind Mode
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="largerText"> Larger Text
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="focusIndicators"> Focus Indicators
+                </label>
+            </div>
+
+            <div class="settings-section">
+                <button id="quickPlayBtn" class="modal-btn primary" style="width: 100%;">⚡ Quick Play</button>
+                <button id="shareBtn" class="modal-btn" style="width: 100%; margin-top: 10px;">📤 Share Score</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div id="instructionsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>How to Play</h2>
+            <div class="instructions">
+                <p><strong>Objective:</strong> Match all the pairs of cards!</p>
+                <p><strong>How to Play:</strong></p>
+                <ul>
+                    <li>Click on cards to flip them and reveal the emoji</li>
+                    <li>Try to find matching pairs</li>
+                    <li>Match all pairs to win!</li>
+                    <li>Use Hint, Undo, or Power-ups strategically</li>
+                </ul>
+                <p><strong>Game Modes:</strong></p>
+                <ul>
+                    <li><strong>Classic:</strong> Traditional matching game</li>
+                    <li><strong>Speed Run:</strong> Complete as fast as possible!</li>
+                    <li><strong>Daily Challenge:</strong> Same puzzle for everyone daily</li>
+                    <li><strong>Multiplayer:</strong> Take turns with another player</li>
+                </ul>
+                <p><strong>Difficulty Modes:</strong></p>
+                <ul>
+                    <li><strong>Normal:</strong> Unlimited flips - relax and play!</li>
+                    <li><strong>Easy:</strong> 30 flips allowed</li>
+                    <li><strong>Hard:</strong> 20 flips allowed</li>
+                    <li><strong>Insane:</strong> 10 flips allowed - for the brave!</li>
+                </ul>
+                <p><strong>Keyboard Controls:</strong> H=Hint, U=Undo, P=Pause, R=Reset</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="pauseOverlay" class="pause-overlay" style="display: none;">
+        <div class="pause-content">
+            <h2>⏸ Game Paused</h2>
+            <p>Press P or click Resume to continue</p>
+            <button id="resumeBtn" class="resume-btn">Resume Game</button>
+        </div>
+    </div>
+
+    <!-- Accessibility Modal -->
+    <div id="accessibilityModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>♿ Accessibility Options</h2>
+            <div class="accessibility-options">
+                <label>
+                    <input type="checkbox" id="highContrastMode"> High Contrast Mode
+                </label>
+                <label>
+                    <input type="checkbox" id="colorblindMode"> Colorblind Friendly (Patterns)
+                </label>
+                <label>
+                    <input type="checkbox" id="largerText"> Larger Text & Buttons
+                </label>
+                <label>
+                    <input type="checkbox" id="focusIndicators"> Enhanced Focus Indicators
+                </label>
+                <p style="margin-top: 15px; font-size: 12px; opacity: 0.7;">These settings will be saved to your device.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sound Theme Modal -->
+    <div id="soundThemeModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🎵 Sound Theme Pack</h2>
+            <div class="sound-theme-selector">
+                <div class="sound-option active" data-sound="classic">
+                    <strong>Classic</strong>
+                    <p>Traditional beep sounds</p>
+                </div>
+                <div class="sound-option" data-sound="retro">
+                    <strong>Retro</strong>
+                    <p>8-bit arcade sounds</p>
+                </div>
+                <div class="sound-option" data-sound="magical">
+                    <strong>Magical</strong>
+                    <p>Mystical chime sounds</p>
+                </div>
+                <div class="sound-option" data-sound="futuristic">
+                    <strong>Futuristic</strong>
+                    <p>Sci-fi synthesizer sounds</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievements Progress Modal -->
+    <div id="achievementsProgressModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🏅 Achievement Progress</h2>
+            <div id="achievementProgressList" class="achievement-progress-list">
+                <!-- Progress items will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Game Modal -->
+    <div id="resumeGameModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>📂 Saved Game Found</h2>
+            <p>You have an unfinished game. Resume or start fresh?</p>
+            <div class="modal-buttons">
+                <button id="resumeSavedGame" class="modal-btn primary">Resume Game</button>
+                <button id="startNewGame" class="modal-btn">Start New</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Endless Mode Stats Modal -->
+    <div id="endlessModeModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🌀 Endless Mode</h2>
+            <div class="endless-stats">
+                <p>Cards Matched: <strong id="endlessMatched">0</strong></p>
+                <p>Total Cards: <strong id="endlessTotal">16</strong></p>
+                <p>Flips Used: <strong id="endlessFlips">0</strong></p>
+                <button id="addMoreCards" class="modal-btn">Add 4 More Cards</button>
+                <button id="endEndlessMode" class="modal-btn">End Endless Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Streak Display -->
+    <div id="streakDisplay" class="streak-display" style="display: none;">
+        <span>🔥 Streak: <span id="currentStreak">0</span> | Best: <span id="bestStreak">0</span></span>
+    </div>
+
+    <!-- Achievement Popup -->
+    <div id="achievementPopup" class="achievement-popup" style="display: none;">
+        <div class="achievement-content">
+            <h3 id="achievementTitle">Achievement Unlocked!</h3>
+            <p id="achievementDesc"></p>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti"></canvas>
+
+    <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Matching Game</title>
+    <link rel="stylesheet" href="/style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Memory Card Game</h1>
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="normal">Normal</button>
+                <button class="mode-btn" data-mode="hard">Hard Mode (20 Flips)</button>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <span>Score:</span>
+                <span id="score">0</span>
+            </div>
+            <div class="stat">
+                <span>Flips:</span>
+                <span id="flips">0</span>
+            </div>
+            <div class="stat" id="hardModeCounter" style="display:none;">
+                <span>Remaining:</span>
+                <span id="remaining">20</span>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard">
+            <!-- Cards will be created here -->
+        </div>
+
+        <button id="hintBtn" class="hint-btn">💡 Hint</button>
+        <button id="resetBtn" class="reset-btn">Reset Game</button>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
