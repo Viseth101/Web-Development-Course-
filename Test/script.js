@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import QRCode from 'qrcode';
+import readline from 'readline';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,6 +19,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     //res.send('Hello, World!');
     res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/test', (req, res) => {
+    const readlineInterface = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    readlineInterface.question('Enter Name: ', (input) => {
+        console.log('You entered:', input);
+        readlineInterface.close();
+    });
 });
 
 app.post('/submit', (req, res) => {
