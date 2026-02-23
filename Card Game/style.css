@@ -1,4 +1,5 @@
 /* styles.css */
+<<<<<<< HEAD
 * {
     box-sizing: border-box;
 }
@@ -13,10 +14,13 @@
     --accent: #f39c12;
 }
 
+=======
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
 body {
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     min-height: 100vh;
     background-image: var(--bg-light);
     margin: 0;
@@ -263,12 +267,19 @@ body.dark-mode {
 .powerup-item:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
+=======
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
 }
 
 .game-board {
     display: grid;
     grid-template-columns: repeat(4, 100px);
     grid-gap: 10px;
+<<<<<<< HEAD
     margin: 15px auto;
     width: fit-content;
 }
@@ -311,6 +322,8 @@ body.dark-mode {
     50% {
         transform: scale(1.1);
     }
+=======
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
 }
 
 .card {
@@ -321,6 +334,7 @@ body.dark-mode {
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     font-size: 40px;
     color: white;
     cursor: pointer;
@@ -346,11 +360,17 @@ body.dark-mode {
 .card:hover:not(.matched) {
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+=======
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
 }
 
 .card.flipped {
     background-color: #ecf0f1;
     color: #2c3e50;
+<<<<<<< HEAD
     animation: flipIn 0.6s ease-in-out;
     border-color: #bdc3c7;
 }
@@ -1884,4 +1904,6 @@ body.flip-bounce .card.flipping {
 .game-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+=======
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
 }

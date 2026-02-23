@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // script.js - Complete Memory Card Game with All Features
 document.addEventListener('DOMContentLoaded', () => {
     // ===== DOM ELEMENTS =====
@@ -408,11 +409,31 @@ document.addEventListener('DOMContentLoaded', () => {
         card.dataset.value = value;
         card.dataset.index = index;
         card.textContent = '?';
+=======
+// script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const gameBoard = document.getElementById('gameBoard');
+    const cardsArray = [
+        'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D',
+        'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'
+    ];
+
+    let firstCard = null;
+    let secondCard = null;
+    let lockBoard = false;
+
+    function createCard(value) {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.value = value;
+        card.textContent = value;
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
         card.addEventListener('click', flipCard);
         return card;
     }
 
     function flipCard() {
+<<<<<<< HEAD
         if (lockBoard || !gameRunning || gamePaused || this.classList.contains('matched')) return;
         if (this === firstCard) return;
         if (this.classList.contains('flipped')) return;
@@ -436,6 +457,12 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             this.textContent = this.dataset.value;
         }, 300);
+=======
+        if (lockBoard) return;
+        if (this === firstCard) return;
+
+        this.classList.add('flipped');
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
         
         if (!firstCard) {
             firstCard = this;
@@ -444,8 +471,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         secondCard = this;
         lockBoard = true;
+<<<<<<< HEAD
         flips++;
         updateFlipsDisplay();
+=======
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
 
         checkForMatch();
     }
@@ -454,13 +484,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (firstCard.dataset.value === secondCard.dataset.value) {
             disableCards();
         } else {
+<<<<<<< HEAD
             combo = 0;
             comboDisplay.textContent = combo;
+=======
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
             unflipCards();
         }
     }
 
     function disableCards() {
+<<<<<<< HEAD
         firstCard.classList.add('matched');
         secondCard.classList.add('matched');
         firstCard.removeEventListener('click', flipCard);
@@ -486,10 +520,16 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             resetBoard();
         }
+=======
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+        resetBoard();
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
     }
 
     function unflipCards() {
         setTimeout(() => {
+<<<<<<< HEAD
             firstCard.classList.add('unflipping');
             secondCard.classList.add('unflipping');
             
@@ -500,11 +540,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 secondCard.textContent = '?';
                 resetBoard();
             }, 600);
+=======
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            resetBoard();
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
         }, 1000);
     }
 
     function resetBoard() {
         [firstCard, secondCard, lockBoard] = [null, null, false];
+<<<<<<< HEAD
         
         if (multiplayerMode) {
             currentPlayer = currentPlayer === 1 ? 2 : 1;
@@ -1342,4 +1388,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== START GAME =====
     init();
+=======
+    }
+
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+
+    function initGame() {
+        shuffle(cardsArray);
+        cardsArray.forEach(value => {
+            const card = createCard(value);
+            gameBoard.appendChild(card);
+        });
+    }
+
+    initGame();
+>>>>>>> e3c95e62d1fd982c04cc6102f86e072180138a54
 });
