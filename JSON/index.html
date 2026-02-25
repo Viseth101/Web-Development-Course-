@@ -9,7 +9,8 @@
 
 <body>
     <h1>Hello World!</h1>
-    <form action="/data" method="GET">
+    <!-- event.preventDefault() fixed Error: Loading failed -->
+    <form onsubmit="event.preventDefault();  testServer();">
         <button type="submit">Get Data</button>
     </form>
 
