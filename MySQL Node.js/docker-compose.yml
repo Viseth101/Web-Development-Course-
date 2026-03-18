@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: my_node_db
+      MYSQL_USER: nodeuser
+      MYSQL_PASSWORD: nodepassword
+    ports:
+      - "3306:3306"

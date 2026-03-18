@@ -1,0 +1,17 @@
+{
+  "name": "Node.js & MySQL Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [3000, 3306],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Postman.postman-for-vscode",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}

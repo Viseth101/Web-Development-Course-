@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules/
+
+# Environment variables (Crucial for protecting your database passwords and Google Maps API keys!)
+.env
+
+# Local data and Database files (Helpful if you are generating local DB files or storing large JSON data dumps for map locations)
+*.sqlite
+/data/*.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
